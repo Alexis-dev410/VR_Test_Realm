@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=4 uid="uid://bkuqdt3kkvti8"]
+
+[ext_resource type="Texture2D" uid="uid://7lvho0ufhdaj" path="res://muzzle_meshes/textures/muzzle1_baseColor.png" id="1_mdr4u"]
+[ext_resource type="Texture2D" uid="uid://cc5ey7vuv3ub5" path="res://muzzle_meshes/textures/muzzle1_emissive.png" id="2_ekpj2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rtpb7"]
+resource_name = "muzzle1"
+transparency = 4
+cull_mode = 2
+albedo_texture = ExtResource("1_mdr4u")
+emission_enabled = true
+emission_texture = ExtResource("2_ekpj2")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_e7ojf"]
+_surfaces = [{
+"aabb": AABB(-100, -100, 2.686587, 200, 200, 91.75877),
+"format": 34896613377,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAQADAAIABAAAAAIAAwAFAAIABgAEAAIABQAHAAIACAAGAAIABwAIAAIA"),
+"name": "muzzle1",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 9,
+"vertex_data": PackedByteArray("gdp9Jf//AAD///9///8AAP9//38AAAAAgdqB2v//AAD/fwAA//8AAP9//////wAAfSV9Jf//AAB9JYHa//8AAAAA/3///wAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_6mxh1"]
+resource_name = "Sketchfab_Scene_muzzlemesh_1_muzzle1_0"
+_surfaces = [{
+"aabb": AABB(-100, -100, 2.686587, 200, 200, 91.75877),
+"attribute_data": PackedByteArray("gdqB2v///3//f/9/gdp9Jf9/////fwAAfSWB2n0lfSUAAP9/"),
+"format": 34896613399,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAQADAAIABAAAAAIAAwAFAAIABgAEAAIABQAHAAIACAAGAAIABwAIAAIA"),
+"material": SubResource("StandardMaterial3D_rtpb7"),
+"name": "muzzle1",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 9,
+"vertex_data": PackedByteArray("gdp9Jf//lRP///9///8AAP9//38AAAAAgdqB2v//lRP/fwAA//8/Hv9//////z8efSV9Jf//lRN9JYHa//+VEwAA/3///wAAigYqoiHc/3////9/092KhgAA/3////9/KyJ0eXT51F3//9yj")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_e7ojf")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="muzzlemesh_1" type="Node3D" parent="."]
+transform = Transform3D(0.005, 4.344397e-10, 0, -4.344397e-10, 0.005, -1.110223e-18, -9.646499e-26, 1.110223e-18, 0.005, 0, 0, 0)
+
+[node name="muzzlemesh_1_muzzle1_0" type="MeshInstance3D" parent="muzzlemesh_1"]
+mesh = SubResource("ArrayMesh_6mxh1")
+skeleton = NodePath("")
