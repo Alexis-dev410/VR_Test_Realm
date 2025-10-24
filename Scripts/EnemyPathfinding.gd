@@ -1,70 +1,67 @@
 extends CharacterBody3D
 
+@onready var sm: StateMachine = $StateMachine
+@onready var anim: AnimationPlayer = $AnimationPlayer
+@onready var nav: NavigationAgent3D = $NavigationAgent3D
+
 @export var movement_speed: float = 15.0
 @export var turn_speed: float = 5.0
-@export var movement_target: Node3D
+@export var vision_angle: float = 60.0  # degrees
+@export var vision_distance: float = 30.0  # optional max distance
 
-@onready var anim: AnimationPlayer = $AnimationPlayer
-@onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
+var target: Node3D
 
-var reached_target: bool = false
+func set_target(new_target: Node3D) -> void:
+	target = new_target
+	if target:
+		print("✅ NPC target set.")
+	else:
+		print("❌ Target is null.")
 
-func _ready():
-	navigation_agent.path_desired_distance = 0.5
-	navigation_agent.target_desired_distance = 0.5
 
-	if not anim.is_playing():
-		anim.play("Walk")
 
-	# Connect to ball's teleport signal if it exists
-	if movement_target.has_signal("teleported"):
-		movement_target.teleported.connect(_on_ball_teleported)
+func _on_target_teleported():
+	if sm.state.name != "FollowBall":
+		print("🎯 Target teleported — switching to FollowBall")
+		sm.transition_to("FollowBall")
+	else:
+		print("🔁 Target teleported — refreshing path")
+		if target:
+			$NavigationAgent3D.set_target_position(target.global_position)
 
-	actor_setup.call_deferred()
 
-func actor_setup():
-	await get_tree().physics_frame
-	set_movement_target(movement_target.global_position)
+# --- Vision check method ---
+func can_see_target() -> bool:
+	if not target:
+		return false
 
-func set_movement_target(pos: Vector3):
-	navigation_agent.set_target_position(pos)
-	reached_target = false
-	if anim.current_animation != "Walk":
-		anim.play("Walk")
+	var to_target = (target.global_position - global_position).normalized()
+	var forward = -global_transform.basis.z.normalized()  # NPC faces -Z
+	var angle_deg = rad_to_deg(acos(forward.dot(to_target)))  # Godot 4.4
 
-func _physics_process(delta):
-	if reached_target:
-		return
+	if angle_deg > vision_angle / 2:
+		return false  # target outside FOV
 
-	if navigation_agent.is_navigation_finished():
-		return
+	# Raycast for obstacles
+	var params = PhysicsRayQueryParameters3D.new()
+	params.from = global_position
+	params.to = target.global_position
+	params.exclude = [self]
 
-	var current_pos: Vector3 = global_position
-	var next_pos: Vector3 = navigation_agent.get_next_path_position()
+	var space_state = get_world_3d().direct_space_state
+	var result = space_state.intersect_ray(params)
+	if result and result.collider != target:
+		return false  # something blocking view
 
-	# Only move in XZ plane
-	var direction = next_pos - current_pos
-	direction.y = 0
-	if direction.length() > 0.01:
-		direction = direction.normalized()
+	# Optional: distance check
+	if global_position.distance_to(target.global_position) > vision_distance:
+		return false
 
-	velocity = direction * movement_speed
+	return true
 
-	# Rotate smoothly toward path direction (flip 180° so he faces forward)
-	if direction.length() > 0.1:
-		var target_basis = Basis.looking_at(direction, Vector3.UP)
-		target_basis = target_basis.rotated(Vector3.UP, PI)
-		basis = basis.slerp(target_basis, turn_speed * delta)
 
-	move_and_slide()
-
-# Called when NPC enters the ball’s Area3D
-func _on_area_3d_body_entered(body: Node3D) -> void:
-	if body == self:
-		reached_target = true
-		if anim.current_animation != "Idle":
-			anim.play("Idle")
-
-# Called when the ball teleports
-func _on_ball_teleported():
-	set_movement_target(movement_target.global_position)
+func check_vision():
+	if target and can_see_target():
+		if sm.state.name != "FollowBall":
+			print("👀 NPC sees the target — switching to FollowBall")
+			sm.transition_to("FollowBall")
