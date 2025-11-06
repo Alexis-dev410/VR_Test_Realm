@@ -1,10 +1,13 @@
-[gd_scene load_steps=58 format=4 uid="uid://bylhhxl7g4s0k"]
+[gd_scene load_steps=61 format=4 uid="uid://bylhhxl7g4s0k"]
 
 [ext_resource type="Script" uid="uid://sabv1jhge205" path="res://Scripts/EnemyPathfinding.gd" id="1_ysabi"]
-[ext_resource type="Script" uid="uid://cawlshphuesrw" path="res://Scenes/state_machine.gd" id="2_dxqbl"]
-[ext_resource type="Script" uid="uid://km2snxpma5r1" path="res://Scenes/patrolling.gd" id="3_bjt3c"]
-[ext_resource type="Script" uid="uid://gw8f315nodu" path="res://Scenes/idle.gd" id="4_lw71q"]
-[ext_resource type="Script" uid="uid://c85ros0jwv03o" path="res://Scenes/follow_ball.gd" id="6_lw71q"]
+[ext_resource type="Script" uid="uid://cawlshphuesrw" path="res://Scripts/state_machine (2).gd" id="2_dxqbl"]
+[ext_resource type="Script" uid="uid://km2snxpma5r1" path="res://Scripts/patrolling.gd" id="3_bjt3c"]
+[ext_resource type="Script" uid="uid://gw8f315nodu" path="res://Scripts/idle.gd" id="4_lw71q"]
+[ext_resource type="Script" uid="uid://d331pbc10fcok" path="res://Scripts/shoot.gd" id="6_aqbks"]
+[ext_resource type="Script" uid="uid://c85ros0jwv03o" path="res://Scripts/follow_ball.gd" id="6_lw71q"]
+[ext_resource type="PackedScene" uid="uid://pqnku0786cct" path="res://Scenes/M1911.tscn" id="7_exv6w"]
+[ext_resource type="PackedScene" uid="uid://cxncoewxf8ta2" path="res://Scenes/Bullets.tscn" id="7_h53xe"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_syr3l"]
 resource_name = "M_Main"
@@ -17920,6 +17923,14 @@ bones/52/scale = Vector3(1, 1, 1)
 mesh = SubResource("ArrayMesh_1xuve")
 skin = SubResource("Skin_va01u")
 
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Rig/Skeleton3D"]
+transform = Transform3D(-0.984931, -0.15405402, 0.07860119, 0.17280863, -0.8584307, 0.48294267, -0.0069256183, 0.48924825, 0.8721169, -0.28960347, 0.9227109, -0.20156908)
+bone_name = "DEF-hand.R"
+bone_idx = 29
+
+[node name="Gun" parent="Rig/Skeleton3D/BoneAttachment3D" instance=ExtResource("7_exv6w")]
+transform = Transform3D(0.6772518, 0.16192557, 0.07148328, 0.070111945, 0.014160275, -0.6963359, -0.16252401, 0.6808667, -0.0025185347, -0.04480523, 0.18758446, 0.041260332)
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("ConvexPolygonShape3D_4gua0")
 
@@ -17940,3 +17951,7 @@ script = ExtResource("3_bjt3c")
 
 [node name="FollowBall" type="Node" parent="StateMachine"]
 script = ExtResource("6_lw71q")
+
+[node name="Shoot" type="Node" parent="StateMachine"]
+script = ExtResource("6_aqbks")
+bullet_scene = ExtResource("7_h53xe")

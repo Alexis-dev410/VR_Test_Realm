@@ -10,7 +10,7 @@ func enter(_msg := {}) -> void:
 	anim.play("Walk")
 
 	# Pick a random point within patrol bounds
-	var patrol_area = 40.0  # same as your floor size
+	var patrol_area = 40.0
 	var random_target = Vector3(
 		randf_range(-patrol_area / 2, patrol_area / 2),
 		enemy.global_position.y,
@@ -24,7 +24,6 @@ func physics_update(delta: float) -> void:
 		return
 
 	if navigation_agent.is_navigation_finished():
-		# Wait half a second before picking a new patrol target
 		await get_tree().create_timer(0.5).timeout
 		state_machine.transition_to("Idle")
 		return
@@ -34,16 +33,12 @@ func physics_update(delta: float) -> void:
 	var dir = current_pos.direction_to(next_pos)
 	enemy.velocity = dir * 15.0
 
-	# Smooth rotation
 	if enemy.velocity.length() > 0.1:
 		var target_basis = Basis.looking_at(enemy.velocity.normalized(), Vector3.UP)
 		target_basis = target_basis.rotated(Vector3.UP, PI)
 		enemy.basis = enemy.basis.slerp(target_basis, 5.0 * delta)
 
 	enemy.move_and_slide()
-
-
-
 
 func exit() -> void:
 	print("Exiting Patrolling")

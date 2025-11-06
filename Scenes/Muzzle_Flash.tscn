@@ -43,11 +43,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_e7ojf")
 
-[node name="Node3D" type="Node3D"]
+[node name="MuzzleFlash" type="Node3D"]
 
-[node name="muzzlemesh_1" type="Node3D" parent="."]
-transform = Transform3D(0.005, 4.344397e-10, 0, -4.344397e-10, 0.005, -1.110223e-18, -9.646499e-26, 1.110223e-18, 0.005, 0, 0, 0)
-
-[node name="muzzlemesh_1_muzzle1_0" type="MeshInstance3D" parent="muzzlemesh_1"]
+[node name="muzzlemesh_1_muzzle1_0" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.002, 1.737759e-10, 0, -1.737759e-10, 0.002, -4.4408923e-19, -3.8586e-26, 4.4408923e-19, 0.002, 0, 0, 0)
 mesh = SubResource("ArrayMesh_6mxh1")
 skeleton = NodePath("")

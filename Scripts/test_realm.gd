@@ -1,7 +1,7 @@
 extends Node3D
 
 @onready var npc = $NPC
-@onready var target = $Target
+@onready var target = $Player
 
 func _ready():
 	await ready
