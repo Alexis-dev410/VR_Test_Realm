@@ -1,7 +1,4 @@
-[gd_scene load_steps=40 format=4 uid="uid://pqnku0786cct"]
-
-[ext_resource type="Texture2D" uid="uid://7lvho0ufhdaj" path="res://muzzle_meshes/textures/muzzle1_baseColor.png" id="1_cw2th"]
-[ext_resource type="Texture2D" uid="uid://cc5ey7vuv3ub5" path="res://muzzle_meshes/textures/muzzle1_emissive.png" id="2_c4mjo"]
+[gd_scene load_steps=35 format=4 uid="uid://pqnku0786cct"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_12itt"]
 resource_name = "Mat_Dark"
@@ -555,48 +552,8 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_nusxi")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rtpb7"]
-resource_name = "muzzle1"
-transparency = 4
-cull_mode = 2
-albedo_texture = ExtResource("1_cw2th")
-emission_enabled = true
-emission_texture = ExtResource("2_c4mjo")
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_e7ojf"]
-_surfaces = [{
-"aabb": AABB(-100, -100, 2.686587, 200, 200, 91.75877),
-"format": 34896613377,
-"index_count": 24,
-"index_data": PackedByteArray("AAABAAIAAQADAAIABAAAAAIAAwAFAAIABgAEAAIABQAHAAIACAAGAAIABwAIAAIA"),
-"name": "muzzle1",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 9,
-"vertex_data": PackedByteArray("gdp9Jf//AAD///9///8AAP9//38AAAAAgdqB2v//AAD/fwAA//8AAP9//////wAAfSV9Jf//AAB9JYHa//8AAAAA/3///wAA")
-}]
-blend_shape_mode = 0
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_6mxh1"]
-resource_name = "Sketchfab_Scene_muzzlemesh_1_muzzle1_0"
-_surfaces = [{
-"aabb": AABB(-100, -100, 2.686587, 200, 200, 91.75877),
-"attribute_data": PackedByteArray("gdqB2v///3//f/9/gdp9Jf9/////fwAAfSWB2n0lfSUAAP9/"),
-"format": 34896613399,
-"index_count": 24,
-"index_data": PackedByteArray("AAABAAIAAQADAAIABAAAAAIAAwAFAAIABgAEAAIABQAHAAIACAAGAAIABwAIAAIA"),
-"material": SubResource("StandardMaterial3D_rtpb7"),
-"name": "muzzle1",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 9,
-"vertex_data": PackedByteArray("gdp9Jf//lRP///9///8AAP9//38AAAAAgdqB2v//lRP/fwAA//8/Hv9//////z8efSV9Jf//lRN9JYHa//+VEwAA/3///wAAigYqoiHc/3////9/092KhgAA/3////9/KyJ0eXT51F3//9yj")
-}]
-blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_e7ojf")
-
 [node name="M1911" type="Node3D"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0, 0, 0)
 
 [node name="M1911" type="Node3D" parent="."]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
@@ -681,11 +638,5 @@ transform = Transform3D(100, -1.629207e-05, 0, 0, 0, 100, -1.629207e-05, -100, 0
 mesh = SubResource("ArrayMesh_ptuck")
 skeleton = NodePath("")
 
-[node name="MuzzleFlash" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1.999893e-08, 0.108784616, -0.2287611)
-visible = false
-
-[node name="muzzlemesh_1_muzzle1_0" type="MeshInstance3D" parent="MuzzleFlash"]
-transform = Transform3D(0.002, 1.737759e-10, 0, -1.737759e-10, 0.002, -4.4408923e-19, -3.8586e-26, 4.4408923e-19, 0.002, 0, 0, 0)
-mesh = SubResource("ArrayMesh_6mxh1")
-skeleton = NodePath("")
+[node name="MuzzlePoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1833445e-08, 0.1203545, -0.2497455)

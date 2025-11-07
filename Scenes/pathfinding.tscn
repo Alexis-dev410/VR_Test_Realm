@@ -212,6 +212,7 @@ script = ExtResource("2_6gacc")
 
 [node name="Player" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.592474, 0.5922282, 11.955872)
+collision_mask = 4
 script = ExtResource("2_abtk1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
