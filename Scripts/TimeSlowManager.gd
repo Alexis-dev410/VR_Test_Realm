@@ -54,10 +54,9 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	# toggle on action press
 	if event.is_action_pressed("time_slow"):
-		if _active:
-			end_time_slow()
-		else:
+		if not _active:
 			start_time_slow(slow_duration, slow_scale)
+
 
 
 func is_active() -> bool:

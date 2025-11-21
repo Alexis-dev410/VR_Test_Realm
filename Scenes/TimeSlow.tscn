@@ -12,7 +12,7 @@ length = 5.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/path = NodePath("CanvasLayer/ClockRoot/Sprite2D:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -27,7 +27,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/path = NodePath("CanvasLayer/ClockRoot/Sprite2D:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -43,7 +43,7 @@ length = 7.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/path = NodePath("CanvasLayer/ClockRoot/Sprite2D:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -63,21 +63,26 @@ _data = {
 [node name="TimeSlow" type="Node3D"]
 script = ExtResource("1_msown")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="ClockRoot" type="Node2D" parent="CanvasLayer"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/ClockRoot"]
+root_node = NodePath("../../..")
 libraries = {
 &"": SubResource("AnimationLibrary_duh38")
 }
 speed_scale = 4.0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/ClockRoot"]
 position = Vector2(120, 488.00006)
 scale = Vector2(5, 5)
 texture = ExtResource("2_2eo50")
 script = ExtResource("3_xh20y")
 
-[node name="TimeSlowStart" type="AudioStreamPlayer" parent="."]
+[node name="TimeSlowStart" type="AudioStreamPlayer" parent="CanvasLayer/ClockRoot"]
 stream = ExtResource("4_duh38")
 
-[node name="TimeSlowStop" type="AudioStreamPlayer" parent="."]
+[node name="TimeSlowStop" type="AudioStreamPlayer" parent="CanvasLayer/ClockRoot"]
 stream = ExtResource("5_8fdhp")

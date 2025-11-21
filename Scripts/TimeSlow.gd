@@ -1,56 +1,51 @@
 extends Sprite2D
 
-@export var use_time := 5.0
+@export var use_time := 2.8
 @export var recharge_time := 7.0
 
-var is_active := false  # Blocks re-pressing
-var is_recharging := false
+var is_active := false
 
 @onready var anim_player := $"../AnimationPlayer"
 @onready var audio_start := $"../TimeSlowStart"
 @onready var audio_stop := $"../TimeSlowStop"
 
 func _ready():
-	visible = true  
-
+	await get_tree().process_frame
+	visible = true
+	anim_player.playback_process_mode = AnimationPlayer.ANIMATION_PROCESS_IDLE  # ignore time scale
 
 func _input(event):
 	if event.is_action_pressed("time_slow") and not is_active:
-		activate_clock()
+		await activate_clock()
 
 func activate_clock() -> void:
 	is_active = true
 
-	# Speed up fade-in animation so the clock appears quickly
+	# Speed up fade-in animation
 	anim_player.speed_scale = 4.0
 	anim_player.play("UseSlow")
 
-	# Play timeslow start audio
 	if audio_start:
 		audio_start.play()
 
-	timer_sequence()
+	await timer_sequence()
 
 func timer_sequence() -> void:
-	# Let Time Slow run for X seconds
-	await get_tree().create_timer(use_time).timeout
+	# Wait for Time Slow duration (real seconds)
+	await get_tree().create_timer(use_time, false).timeout
 
-	# FORCE STOP current animation so it doesn't hang transparent
+	# FORCE STOP current animation so the clock doesn't hang transparent
 	anim_player.stop()
 
 	# Reset normal speed for recharge
 	anim_player.speed_scale = 1.0
-
-	# Play fade-out / recharge animation
 	anim_player.play("RechargeSlow")
 
-	# Play stop sound
+	# Play stop audio
 	if audio_stop:
 		audio_stop.play()
 
-	# Wait for recharge period
-	await get_tree().create_timer(recharge_time).timeout
-
-	visible = false  # Hide clock again after recharge completes
+	# Wait for recharge period (real seconds)
+	await get_tree().create_timer(recharge_time, false).timeout
 
 	is_active = false
