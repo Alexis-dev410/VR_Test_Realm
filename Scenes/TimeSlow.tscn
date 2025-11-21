@@ -73,7 +73,6 @@ root_node = NodePath("../../..")
 libraries = {
 &"": SubResource("AnimationLibrary_duh38")
 }
-speed_scale = 4.0
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/ClockRoot"]
 position = Vector2(120, 488.00006)
