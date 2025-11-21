@@ -1,9 +1,10 @@
-[gd_scene load_steps=26 format=3 uid="uid://cemwjndob06np"]
+[gd_scene load_steps=27 format=3 uid="uid://cemwjndob06np"]
 
 [ext_resource type="Script" uid="uid://bn75bugcfoxgw" path="res://Scripts/test_realm.gd" id="1_6gacc"]
 [ext_resource type="PackedScene" uid="uid://bylhhxl7g4s0k" path="res://Scenes/enemyPatrolling.tscn" id="1_sqs8r"]
 [ext_resource type="Script" uid="uid://bsb71m318wnpj" path="res://Scripts/camera_3d.gd" id="2_6gacc"]
 [ext_resource type="Script" uid="uid://bmjsv5cmr3bxw" path="res://Scripts/Player.gd" id="2_abtk1"]
+[ext_resource type="PackedScene" uid="uid://co6gkhqvr0tao" path="res://Scenes/TimeSlow.tscn" id="5_bfti4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_abtk1"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -220,3 +221,6 @@ mesh = SubResource("CapsuleMesh_6gacc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 shape = SubResource("CapsuleShape3D_6gacc")
+
+[node name="TimeSlow" parent="." instance=ExtResource("5_bfti4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 29)

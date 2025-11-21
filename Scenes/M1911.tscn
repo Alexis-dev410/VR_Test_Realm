@@ -639,4 +639,4 @@ mesh = SubResource("ArrayMesh_ptuck")
 skeleton = NodePath("")
 
 [node name="MuzzlePoint" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1833445e-08, 0.1203545, -0.2497455)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.382464e-08, 0.1203545, -0.2629326)

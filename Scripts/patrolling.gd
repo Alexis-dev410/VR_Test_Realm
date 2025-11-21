@@ -4,17 +4,44 @@ extends State
 @onready var navigation_agent: NavigationAgent3D = $"../../NavigationAgent3D"
 var enemy: CharacterBody3D
 
+func _ready() -> void:
+	enemy = $"../.."
+
+func check_dead():
+	if enemy.hp <= 0:
+		state_machine.transition_to("Dead")
+		return true
+	return false
+
 func enter(_msg := {}) -> void:
+	if check_dead():
+		return
+	# --- Safe state_machine assignment ---
+	if not state_machine:
+		var p = get_parent()
+		if p is StateMachine:
+			state_machine = p
+		else:
+			for i in range(4):
+				p = p.get_parent()
+				if p is StateMachine:
+					state_machine = p
+					break
+
+	if not state_machine:
+		print("❌ Patrolling: state_machine is NULL!")
+		return
+	# -------------------------------------
+
 	print("Entering Patrolling")
 	enemy = $"../.."
 	anim.play("Walk")
 
-	# Pick a random point within patrol bounds
 	var patrol_area = 40.0
 	var random_target = Vector3(
-		randf_range(-patrol_area / 2, patrol_area / 2),
+		randf_range(-patrol_area/2, patrol_area/2),
 		enemy.global_position.y,
-		randf_range(-patrol_area / 2, patrol_area / 2)
+		randf_range(-patrol_area/2, patrol_area/2)
 	)
 	navigation_agent.set_target_position(random_target)
 

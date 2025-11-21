@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=4 uid="uid://cxncoewxf8ta2"]
 
-[ext_resource type="Texture2D" uid="uid://brvkqmp2hkw1i" path="res://Glock 19 Gen 4/Glock 19 Gen 4 Textures/Glock 19 Mag and Cartridge Textures/Glock 19 Mag and Bullet Mat_Base_color.png" id="1_76lte"]
+[ext_resource type="Texture2D" uid="uid://brvkqmp2hkw1i" path="res://Assets/Glock 19 Gen 4/Glock 19 Gen 4 Textures/Glock 19 Mag and Cartridge Textures/Glock 19 Mag and Bullet Mat_Base_color.png" id="1_76lte"]
 [ext_resource type="Script" uid="uid://cp0dq8rgshtwn" path="res://Scripts/bullets.gd" id="1_rayda"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wvck7"]

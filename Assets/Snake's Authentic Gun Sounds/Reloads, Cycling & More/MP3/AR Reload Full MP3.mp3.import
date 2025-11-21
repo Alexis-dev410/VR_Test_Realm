@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c3pqkaw5osvta"
+path="res://.godot/imported/AR Reload Full MP3.mp3-dfe82d169212ab7c31e8557d11d1cff5.mp3str"
+
+[deps]
+
+source_file="res://Assets/Snake's Authentic Gun Sounds/Reloads, Cycling & More/MP3/AR Reload Full MP3.mp3"
+dest_files=["res://.godot/imported/AR Reload Full MP3.mp3-dfe82d169212ab7c31e8557d11d1cff5.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

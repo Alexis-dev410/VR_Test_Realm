@@ -7,8 +7,9 @@ extends Node
 var state_machine: StateMachine = null
 
 # Virtual methods
-func handle_input(_event: InputEvent):
+func handle_input(_event: InputEvent) -> void:
 	pass
+
 	
 func update(_delta: float) -> void:
 	pass

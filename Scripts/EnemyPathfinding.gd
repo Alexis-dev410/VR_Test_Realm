@@ -1,16 +1,18 @@
 extends CharacterBody3D
 
-@onready var sm: StateMachine = $StateMachine
+@onready var sm: EnemyStateMachine = $StateMachine
 @onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
-@onready var skeleton: Skeleton3D = $Rig/Skeleton3D	# ✅ Correct path
+@onready var skeleton: Skeleton3D = $Rig/Skeleton3D
 @export var gun_scene: PackedScene
 
 @export var movement_speed: float = 15.0
 @export var turn_speed: float = 5.0
 @export var vision_angle: float = 360.0
 @export var vision_distance: float = 30.0
+@export var max_hp: int = 1
 
+var hp: int = 1
 var target: CharacterBody3D
 var gun_instance: Node3D
 var muzzle_point: Node3D
@@ -55,6 +57,7 @@ func _ready():
 			muzzle_point.transform.origin = Vector3(0, 0, -0.5)
 			gun_instance.add_child(muzzle_point)
 			print("✨ Created missing MuzzlePoint.")
+	hp = max_hp
 
 
 func _on_target_teleported():
@@ -110,3 +113,10 @@ func check_vision() -> void:
 			if not can_see_target() and sm.state.name == "FollowBall":
 				print("❌ Lost sight of player — going Idle")
 				sm.transition_to("Idle")
+
+func apply_damage(amount: int) -> void:
+	hp -= amount
+	print("⚠️ Enemy HP:", hp)
+
+	if hp <= 0:
+		sm.transition_to("Dead")   # transition immediately

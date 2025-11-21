@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cfli4k821xbv2"
+path="res://.godot/imported/AK Reload Full MP3.mp3-83f356f74cbbc373ee797179a627df04.mp3str"
+
+[deps]
+
+source_file="res://Assets/Snake's Authentic Gun Sounds/Reloads, Cycling & More/MP3/AK Reload Full MP3.mp3"
+dest_files=["res://.godot/imported/AK Reload Full MP3.mp3-83f356f74cbbc373ee797179a627df04.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

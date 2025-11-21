@@ -1,0 +1,175 @@
+[gd_scene load_steps=16 format=3 uid="uid://tt5d1e7l5qk2"]
+
+[ext_resource type="Material" uid="uid://bn5f4b4gveq2c" path="res://Assets/Arena1Color.tres" id="1_tmng6"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_p2bck"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tmng6"]
+albedo_color = Color(4.740879e-06, 0.53515154, 0.072288744, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_djxys"]
+material = SubResource("StandardMaterial3D_tmng6")
+size = Vector2(150, 150)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_djxys"]
+albedo_color = Color(0.3764706, 0.12156863, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_w5apk"]
+material = SubResource("StandardMaterial3D_djxys")
+size = Vector3(150, 10, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w5apk"]
+albedo_color = Color(0.14901961, 0.12156863, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_y5d0d"]
+material = SubResource("StandardMaterial3D_w5apk")
+size = Vector3(8, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y5d0d"]
+albedo_color = Color(0.14901961, 0.12156863, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ofnc7"]
+material = SubResource("StandardMaterial3D_y5d0d")
+size = Vector3(1, 10, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_r38ho"]
+material = ExtResource("1_tmng6")
+size = Vector3(15, 3, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_xw571"]
+material = ExtResource("1_tmng6")
+size = Vector3(10, 10, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_0t8bk"]
+material = ExtResource("1_tmng6")
+size = Vector3(20, 5, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_koydg"]
+material = ExtResource("1_tmng6")
+size = Vector3(10, 30, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tmng6"]
+material = ExtResource("1_tmng6")
+size = Vector3(1, 10, 100)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_p2bck")
+
+[node name="Floor" type="MeshInstance3D" parent="NavigationRegion3D"]
+mesh = SubResource("PlaneMesh_djxys")
+skeleton = NodePath("../..")
+
+[node name="Walls" type="Node3D" parent="NavigationRegion3D"]
+
+[node name="Wall" type="MeshInstance3D" parent="NavigationRegion3D/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.953, -75)
+mesh = SubResource("BoxMesh_w5apk")
+
+[node name="Wall2" type="MeshInstance3D" parent="NavigationRegion3D/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.953, 75)
+mesh = SubResource("BoxMesh_w5apk")
+
+[node name="Wall3" type="MeshInstance3D" parent="NavigationRegion3D/Walls"]
+transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 75, 4.953, 0)
+mesh = SubResource("BoxMesh_w5apk")
+
+[node name="Wall4" type="MeshInstance3D" parent="NavigationRegion3D/Walls"]
+transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, -75, 4.953, 0)
+mesh = SubResource("BoxMesh_w5apk")
+
+[node name="Wall5" type="MeshInstance3D" parent="NavigationRegion3D/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9645853, -53.14208)
+mesh = SubResource("BoxMesh_y5d0d")
+
+[node name="Wall6" type="MeshInstance3D" parent="NavigationRegion3D/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4859319, 2.0983958, -53.14208)
+mesh = SubResource("BoxMesh_ofnc7")
+skeleton = NodePath("../Wall5")
+
+[node name="Wall7" type="MeshInstance3D" parent="NavigationRegion3D/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.1262846, -53.14208)
+mesh = SubResource("BoxMesh_y5d0d")
+
+[node name="Wall8" type="MeshInstance3D" parent="NavigationRegion3D/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.836032, 2.0983958, -53.14208)
+mesh = SubResource("BoxMesh_ofnc7")
+skeleton = NodePath("../Wall5")
+
+[node name="Wall9" type="MeshInstance3D" parent="NavigationRegion3D/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.73578, 0.9645853, -53.14208)
+mesh = SubResource("BoxMesh_y5d0d")
+
+[node name="Wall10" type="MeshInstance3D" parent="NavigationRegion3D/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.249847, 2.0983958, -53.14208)
+mesh = SubResource("BoxMesh_ofnc7")
+skeleton = NodePath("../Wall5")
+
+[node name="Wall11" type="MeshInstance3D" parent="NavigationRegion3D/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.73578, 6.1262846, -53.14208)
+mesh = SubResource("BoxMesh_y5d0d")
+
+[node name="Wall12" type="MeshInstance3D" parent="NavigationRegion3D/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.571808, 2.0983958, -53.14208)
+mesh = SubResource("BoxMesh_ofnc7")
+skeleton = NodePath("../Wall5")
+
+[node name="Wall13" type="MeshInstance3D" parent="NavigationRegion3D/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.319336, 0.9645853, -53.14208)
+mesh = SubResource("BoxMesh_y5d0d")
+
+[node name="Wall14" type="MeshInstance3D" parent="NavigationRegion3D/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.805267, 2.0983958, -53.14208)
+mesh = SubResource("BoxMesh_ofnc7")
+skeleton = NodePath("../Wall5")
+
+[node name="Wall15" type="MeshInstance3D" parent="NavigationRegion3D/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.319336, 6.1262846, -53.14208)
+mesh = SubResource("BoxMesh_y5d0d")
+
+[node name="Wall16" type="MeshInstance3D" parent="NavigationRegion3D/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.483307, 2.0983958, -53.14208)
+mesh = SubResource("BoxMesh_ofnc7")
+skeleton = NodePath("../Wall5")
+
+[node name="Wall17" type="MeshInstance3D" parent="NavigationRegion3D/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.748, 2.891713, -53.142)
+mesh = SubResource("BoxMesh_r38ho")
+skeleton = NodePath("../Wall16")
+
+[node name="Wall18" type="MeshInstance3D" parent="NavigationRegion3D/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.41086, 2.891713, -53.142)
+mesh = SubResource("BoxMesh_r38ho")
+skeleton = NodePath("../Wall16")
+
+[node name="Wall19" type="MeshInstance3D" parent="NavigationRegion3D/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.411, 0.965, 48.635)
+mesh = SubResource("BoxMesh_r38ho")
+skeleton = NodePath("../Wall16")
+
+[node name="Wall20" type="MeshInstance3D" parent="NavigationRegion3D/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.71523, 0.965, 48.635)
+mesh = SubResource("BoxMesh_r38ho")
+skeleton = NodePath("../Wall16")
+
+[node name="Triangle" type="MeshInstance3D" parent="NavigationRegion3D/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.932035, 48.63485)
+mesh = SubResource("PrismMesh_xw571")
+
+[node name="Triangle2" type="MeshInstance3D" parent="NavigationRegion3D/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.723, 2.669, 48.635)
+mesh = SubResource("PrismMesh_0t8bk")
+
+[node name="Triangle3" type="MeshInstance3D" parent="NavigationRegion3D/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.010403, 4.9951105, 48.635)
+mesh = SubResource("PrismMesh_koydg")
+skeleton = NodePath("../Triangle2")
+
+[node name="Wall21" type="MeshInstance3D" parent="NavigationRegion3D/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51.574722, 4.3107576, 0)
+mesh = SubResource("BoxMesh_tmng6")
+
+[node name="Wall22" type="MeshInstance3D" parent="NavigationRegion3D/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56.301155, 4.311, 0)
+mesh = SubResource("BoxMesh_tmng6")

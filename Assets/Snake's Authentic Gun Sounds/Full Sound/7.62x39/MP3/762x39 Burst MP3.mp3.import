@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bb2mf1rfwgy1a"
+path="res://.godot/imported/762x39 Burst MP3.mp3-233e4f5ce517e2da73080b8331f820ba.mp3str"
+
+[deps]
+
+source_file="res://Assets/Snake's Authentic Gun Sounds/Full Sound/7.62x39/MP3/762x39 Burst MP3.mp3"
+dest_files=["res://.godot/imported/762x39 Burst MP3.mp3-233e4f5ce517e2da73080b8331f820ba.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,83 @@
+[gd_scene load_steps=10 format=3 uid="uid://co6gkhqvr0tao"]
+
+[ext_resource type="Script" uid="uid://deuc0bop4jdbv" path="res://Scripts/TimeSlowManager.gd" id="1_msown"]
+[ext_resource type="Texture2D" uid="uid://w3cbce7tdvgy" path="res://Assets/Sprites/clock0.png" id="2_2eo50"]
+[ext_resource type="Script" uid="uid://dgxudg1gvw67q" path="res://Scripts/TimeSlow.gd" id="3_xh20y"]
+[ext_resource type="AudioStream" uid="uid://dkqmcg5u2j3qq" path="res://Assets/Audio/TimeSlowStart.mp3" id="4_duh38"]
+[ext_resource type="AudioStream" uid="uid://kgcq4btqs8n2" path="res://Assets/Audio/TimeSlowStop.mp3" id="5_8fdhp"]
+
+[sub_resource type="Animation" id="Animation_2eo50"]
+resource_name = "UseSlow"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xh20y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_duh38"]
+resource_name = "RechargeSlow"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_duh38"]
+_data = {
+&"RESET": SubResource("Animation_xh20y"),
+&"RechargeSlow": SubResource("Animation_duh38"),
+&"UseSlow": SubResource("Animation_2eo50")
+}
+
+[node name="TimeSlow" type="Node3D"]
+script = ExtResource("1_msown")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_duh38")
+}
+speed_scale = 4.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(120, 488.00006)
+scale = Vector2(5, 5)
+texture = ExtResource("2_2eo50")
+script = ExtResource("3_xh20y")
+
+[node name="TimeSlowStart" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_duh38")
+
+[node name="TimeSlowStop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_8fdhp")
