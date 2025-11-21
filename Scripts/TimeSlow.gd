@@ -49,3 +49,4 @@ func timer_sequence() -> void:
 	await get_tree().create_timer(recharge_time, false).timeout
 
 	is_active = false
+ 
