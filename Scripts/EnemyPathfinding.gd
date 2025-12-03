@@ -7,15 +7,15 @@ extends CharacterBody3D
 @export var gun_scene: PackedScene
 @export var reload_time: float = 1.5
 
-@export var movement_speed: float = 8.0
+@export var movement_speed: float = 15.0
 @export var turn_speed: float = 5.0
 @export var vision_angle: float = 360.0
 @export var vision_distance: float = 30.0
-@export var max_hp: int = 1
-@export var max_ammo: int = 2
+@export var max_hp: int = 5
+@export var max_ammo: int = 7
 
 
-var hp: int = 1
+var hp: int = 5
 var target: CharacterBody3D
 var gun_instance: Node3D
 var muzzle_point: Node3D
