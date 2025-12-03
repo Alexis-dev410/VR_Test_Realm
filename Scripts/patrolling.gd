@@ -37,7 +37,7 @@ func enter(_msg := {}) -> void:
 	enemy = $"../.."
 	anim.play("Walk")
 
-	var patrol_area = 40.0
+	var patrol_area = 150.0
 	var random_target = Vector3(
 		randf_range(-patrol_area/2, patrol_area/2),
 		enemy.global_position.y,
@@ -58,7 +58,7 @@ func physics_update(delta: float) -> void:
 	var current_pos = enemy.global_position
 	var next_pos = navigation_agent.get_next_path_position()
 	var dir = current_pos.direction_to(next_pos)
-	enemy.velocity = dir * 15.0
+	enemy.velocity = dir * 5.0
 
 	if enemy.velocity.length() > 0.1:
 		var target_basis = Basis.looking_at(enemy.velocity.normalized(), Vector3.UP)

@@ -4,8 +4,8 @@ extends State
 @onready var navigation_agent: NavigationAgent3D = $"../../NavigationAgent3D"
 var enemy: CharacterBody3D
 
-@export var follow_speed: float = 15.0
-@export var attack_range: float = 10.0
+@export var follow_speed: float = 10.0
+@export var attack_range: float = 20.0
 @export var lost_sight_delay: float = 2.0
 var lost_sight_timer: float = 0.0
 

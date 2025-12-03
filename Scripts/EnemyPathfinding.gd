@@ -10,7 +10,7 @@ extends CharacterBody3D
 @export var movement_speed: float = 15.0
 @export var turn_speed: float = 5.0
 @export var vision_angle: float = 360.0
-@export var vision_distance: float = 30.0
+@export var vision_distance: float = 40.0
 @export var max_hp: int = 5
 @export var max_ammo: int = 7
 

@@ -2,7 +2,7 @@ extends State
 
 @onready var anim: AnimationPlayer = $"../../AnimationPlayer"
 @export var bullet_scene: PackedScene
-@export var attack_range: float = 10.0
+@export var attack_range: float = 20.0
 
 var enemy: CharacterBody3D
 var has_fired: bool = false
