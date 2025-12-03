@@ -1,8 +1,9 @@
-[gd_scene load_steps=43 format=3 uid="uid://cq0ggeiveh2b3"]
+[gd_scene load_steps=44 format=3 uid="uid://cq0ggeiveh2b3"]
 
 [ext_resource type="Texture2D" uid="uid://cqkd7qln5b8bt" path="res://Assets/Textures/Arena3 Floor/textures/volcanic_rock_tiles_diff_1k.png" id="1_pdkkp"]
 [ext_resource type="Texture2D" uid="uid://dmqlqg4piek42" path="res://Assets/Textures/Arena3 Wall/textures/volcanic_herringbone_01_diff_1k.png" id="2_5gi88"]
 [ext_resource type="PackedScene" uid="uid://bylhhxl7g4s0k" path="res://Scenes/enemyPatrolling.tscn" id="3_5gi88"]
+[ext_resource type="PackedScene" uid="uid://co6gkhqvr0tao" path="res://Scenes/TimeSlow.tscn" id="4_ov3qu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ov3qu"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -1675,3 +1676,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -28)
 
 [node name="NPC11" parent="Enemies" instance=ExtResource("3_5gi88")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -28)
+
+[node name="TimeSlow" parent="." instance=ExtResource("4_ov3qu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 29)

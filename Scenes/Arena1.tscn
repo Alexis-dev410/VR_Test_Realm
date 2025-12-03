@@ -1,8 +1,9 @@
-[gd_scene load_steps=79 format=3 uid="uid://tt5d1e7l5qk2"]
+[gd_scene load_steps=80 format=3 uid="uid://tt5d1e7l5qk2"]
 
 [ext_resource type="Texture2D" uid="uid://c16bd3bxvf2hb" path="res://Assets/Textures/Arena1 Floor/textures/sandstone_cracks_diff_1k.png" id="1_djxys"]
 [ext_resource type="Texture2D" uid="uid://bs04d1ge5g6xp" path="res://Assets/Textures/Arena1 Wall/textures/old_sandstone_02_diff_1k.png" id="2_w5apk"]
 [ext_resource type="PackedScene" uid="uid://bylhhxl7g4s0k" path="res://Scenes/enemyPatrolling.tscn" id="3_w5apk"]
+[ext_resource type="PackedScene" uid="uid://co6gkhqvr0tao" path="res://Scenes/TimeSlow.tscn" id="4_y5d0d"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_djxys"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -1294,3 +1295,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 27.5)
 
 [node name="NPC3" parent="." instance=ExtResource("3_w5apk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3384781, 0, 27.5)
+
+[node name="TimeSlow" parent="." instance=ExtResource("4_y5d0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 29)

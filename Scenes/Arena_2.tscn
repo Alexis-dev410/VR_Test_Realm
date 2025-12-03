@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cvu10s281qhyo" path="res://Assets/Textures/Arena2 Floor/textures/dark_wooden_planks_diff_1k.png" id="1_15ate"]
 [ext_resource type="Texture2D" uid="uid://q6q633agtdxd" path="res://Assets/Textures/Arena2 Wall/textures/dark_brick_wall_diff_1k.png" id="2_1ngpm"]
 [ext_resource type="PackedScene" uid="uid://bylhhxl7g4s0k" path="res://Scenes/enemyPatrolling.tscn" id="3_oa7y1"]
-[ext_resource type="Script" uid="uid://bsb71m318wnpj" path="res://Scripts/camera_3d.gd" id="4_mx2fq"]
+[ext_resource type="PackedScene" uid="uid://co6gkhqvr0tao" path="res://Scenes/TimeSlow.tscn" id="5_7mgkg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1ngpm"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -1278,6 +1278,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -30)
 [node name="NPC5" parent="." instance=ExtResource("3_oa7y1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.5, 0, -25.5)
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.256744, 3.8372428, 37.5671)
-script = ExtResource("4_mx2fq")
+[node name="TimeSlow" parent="." instance=ExtResource("5_7mgkg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 29)
