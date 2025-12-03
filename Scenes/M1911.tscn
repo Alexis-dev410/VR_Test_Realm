@@ -1,4 +1,6 @@
-[gd_scene load_steps=35 format=4 uid="uid://pqnku0786cct"]
+[gd_scene load_steps=36 format=4 uid="uid://pqnku0786cct"]
+
+[ext_resource type="AudioStream" uid="uid://bj58bxon8tl1x" path="res://Assets/Audio/Reload.mp3" id="1_pjh2n"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_12itt"]
 resource_name = "Mat_Dark"
@@ -640,3 +642,6 @@ skeleton = NodePath("")
 
 [node name="MuzzlePoint" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.382464e-08, 0.1203545, -0.2629326)
+
+[node name="Reload" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("1_pjh2n")

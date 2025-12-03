@@ -10,16 +10,19 @@ var has_fired: bool = false
 func _ready() -> void:
 	enemy = $"../.."
 
+
 func check_dead():
 	if enemy.hp <= 0:
 		state_machine.transition_to("Dead")
 		return true
 	return false
 
+
 func enter(_msg := {}) -> void:
 	if check_dead():
 		return
-	# --- Safe state_machine assignment ---
+
+	# ensure state_machine reference
 	if not state_machine:
 		var p = get_parent()
 		if p is StateMachine:
@@ -30,11 +33,6 @@ func enter(_msg := {}) -> void:
 				if p is StateMachine:
 					state_machine = p
 					break
-
-	if not state_machine:
-		print("❌ Shoot: state_machine is NULL!")
-		return
-	# -------------------------------------
 
 	enemy = $"../.."
 
@@ -48,34 +46,67 @@ func enter(_msg := {}) -> void:
 			print("❌ MuzzlePoint missing")
 			return
 
+	# 🔥 IMPORTANT: If entering Shoot state with 0 ammo → RELOAD immediately
+	if enemy.needs_reload():
+		print("⛔ Entered Shoot but ammo = 0 → Reloading")
+		state_machine.transition_to("Reload")
+		return
+
 	has_fired = false
 	anim.play("Pistol_Shoot")
+
 
 func physics_update(delta: float) -> void:
 	if not enemy.target:
 		state_machine.transition_to("Idle")
 		return
 
+	# Vision / distance check
 	var dist = enemy.global_position.distance_to(enemy.target.global_position)
 	if dist > attack_range or not enemy.can_see_target():
 		state_machine.transition_to("FollowBall")
 		return
 
+	# Rotate toward player
 	var to_target = (enemy.target.global_position - enemy.global_position).normalized()
 	var target_basis = Basis.looking_at(to_target, Vector3.UP).rotated(Vector3.UP, PI)
 	enemy.basis = enemy.basis.slerp(target_basis, enemy.turn_speed * delta)
 
+	# 🔥 BEFORE FIRING: Check if reload is needed
+	if enemy.needs_reload():
+		print("⛔ Out of ammo → Reloading")
+		state_machine.transition_to("Reload")
+		return
+
+	# Fire bullet at the animation firing frame
 	if anim.current_animation == "Pistol_Shoot" and anim.current_animation_position > 0.15 and not has_fired:
 		fire_bullet()
 		has_fired = true
 
+		# 🔥 AFTER FIRING: if ammo now zero, reload
+		if enemy.needs_reload():
+			print("💀 Ammo reached 0 → Reloading")
+			state_machine.transition_to("Reload")
+			return
+
+	# End shoot animation return to following
 	if not anim.is_playing():
 		state_machine.transition_to("FollowBall")
 
+
 func fire_bullet() -> void:
+	# If somehow ammo is empty prevent firing
+	if enemy.needs_reload():
+		print("❌ Tried to fire with 0 ammo")
+		return
+
 	if not bullet_scene or not enemy.muzzle_point:
 		print("❌ Cannot fire: missing data")
 		return
+
+	# 🔥 CONSUME AMMO HERE
+	enemy.consume_ammo()
+	print("🔫 Ammo after shot:", enemy.ammo)
 
 	var bullet = bullet_scene.instantiate()
 	get_tree().current_scene.add_child(bullet)

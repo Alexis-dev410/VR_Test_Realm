@@ -5,17 +5,22 @@ extends CharacterBody3D
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var skeleton: Skeleton3D = $Rig/Skeleton3D
 @export var gun_scene: PackedScene
+@export var reload_time: float = 1.5
 
-@export var movement_speed: float = 15.0
+@export var movement_speed: float = 8.0
 @export var turn_speed: float = 5.0
 @export var vision_angle: float = 360.0
 @export var vision_distance: float = 30.0
 @export var max_hp: int = 1
+@export var max_ammo: int = 2
+
 
 var hp: int = 1
 var target: CharacterBody3D
 var gun_instance: Node3D
 var muzzle_point: Node3D
+var ammo: int = max_ammo
+var is_reloading: bool = false
 
 func set_target(new_target: Node3D) -> void:
 	target = new_target
@@ -120,3 +125,25 @@ func apply_damage(amount: int) -> void:
 
 	if hp <= 0:
 		sm.transition_to("Dead")   # transition immediately
+
+#Consume Ammo
+func consume_ammo():
+	ammo -= 1
+	if ammo < 0:
+		ammo = 0
+	print("🔫 Ammo now:", ammo)
+
+
+func needs_reload() -> bool:
+	return ammo <= 0
+
+# RELOADING
+func start_reload():
+	if is_reloading:
+		return
+	if ammo >= max_ammo:
+		return
+
+	print("🔄 NPC starting reload")
+	is_reloading = true
+	sm.transition_to("Reload")
