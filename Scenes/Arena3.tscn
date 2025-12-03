@@ -1,3 +1,762 @@
-[gd_scene format=3 uid="uid://cq0ggeiveh2b3"]
+[gd_scene load_steps=9 format=3 uid="uid://cq0ggeiveh2b3"]
+
+[ext_resource type="Texture2D" uid="uid://cqkd7qln5b8bt" path="res://Assets/Textures/Arena3 Floor/textures/volcanic_rock_tiles_diff_1k.png" id="1_pdkkp"]
+[ext_resource type="Texture2D" uid="uid://dmqlqg4piek42" path="res://Assets/Textures/Arena3 Wall/textures/volcanic_herringbone_01_diff_1k.png" id="2_5gi88"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_ov3qu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ubb4"]
+albedo_texture = ExtResource("1_pdkkp")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hnyo5"]
+material = SubResource("StandardMaterial3D_1ubb4")
+size = Vector2(150, 150)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ngpm"]
+albedo_texture = ExtResource("2_5gi88")
+
+[sub_resource type="BoxMesh" id="BoxMesh_qw3hq"]
+material = SubResource("StandardMaterial3D_1ngpm")
+size = Vector3(10, 10, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_df8pj"]
+points = PackedVector3Array(5, 5, 0.5, 5, 5, -0.5, -5, 5, 0.5, 5, -5, 0.5, 5, -5, -0.5, -5, 5, -0.5, -5, -5, 0.5, -5, -5, -0.5)
 
 [node name="Arena3" type="Node3D"]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+navigation_mesh = SubResource("NavigationMesh_ov3qu")
+
+[node name="Floor" type="MeshInstance3D" parent="NavigationRegion3D"]
+mesh = SubResource("PlaneMesh_hnyo5")
+skeleton = NodePath("../..")
+
+[node name="Walls" type="Node3D" parent="NavigationRegion3D"]
+
+[node name="BorderWall1" type="Node3D" parent="NavigationRegion3D/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -75)
+
+[node name="Wall" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -70, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall1/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall1/Wall/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall2" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall1/Wall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall1/Wall2/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall3" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall1/Wall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall1/Wall3/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall4" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall1/Wall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall1/Wall4/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall5" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall1/Wall5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall1/Wall5/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall6" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall1/Wall6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall1/Wall6/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall7" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall1/Wall7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall1/Wall7/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall8" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall1/Wall8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall1/Wall8/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall9" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall1/Wall9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall1/Wall9/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall10" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall1/Wall10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall1/Wall10/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall11" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall1/Wall11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall1/Wall11/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall12" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall1/Wall12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall1/Wall12/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall13" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall1/Wall13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall1/Wall13/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall14" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall1/Wall14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall1/Wall14/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall15" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall1/Wall15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall1/Wall15/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="BorderWall2" type="Node3D" parent="NavigationRegion3D/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 75)
+
+[node name="Wall" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -70, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall2/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall2/Wall/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall2" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall2/Wall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall2/Wall2/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall3" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall2/Wall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall2/Wall3/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall4" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall2/Wall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall2/Wall4/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall5" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall2/Wall5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall2/Wall5/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall6" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall2/Wall6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall2/Wall6/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall7" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall2/Wall7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall2/Wall7/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall8" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall2/Wall8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall2/Wall8/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall9" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall2/Wall9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall2/Wall9/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall10" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall2/Wall10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall2/Wall10/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall11" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall2/Wall11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall2/Wall11/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall12" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall2/Wall12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall2/Wall12/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall13" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall2/Wall13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall2/Wall13/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall14" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall2/Wall14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall2/Wall14/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall15" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall2/Wall15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall2/Wall15/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="BorderWall3" type="Node3D" parent="NavigationRegion3D/Walls"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 75, 0, 0)
+
+[node name="Wall" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -70, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall3/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall3/Wall/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall2" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall3/Wall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall3/Wall2/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall3" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall3/Wall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall3/Wall3/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall4" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall3/Wall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall3/Wall4/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall5" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall3/Wall5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall3/Wall5/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall6" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall3/Wall6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall3/Wall6/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall7" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall3/Wall7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall3/Wall7/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall8" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall3/Wall8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall3/Wall8/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall9" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall3/Wall9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall3/Wall9/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall10" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall3/Wall10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall3/Wall10/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall11" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall3/Wall11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall3/Wall11/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall12" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall3/Wall12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall3/Wall12/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall13" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall3/Wall13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall3/Wall13/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall14" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall3/Wall14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall3/Wall14/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall15" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall3/Wall15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall3/Wall15/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="BorderWall4" type="Node3D" parent="NavigationRegion3D/Walls"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -75, 0, 0)
+
+[node name="Wall" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -70, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall4/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall4/Wall/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall2" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall4/Wall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall4/Wall2/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall3" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall4/Wall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall4/Wall3/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall4" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall4/Wall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall4/Wall4/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall5" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall4/Wall5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall4/Wall5/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall6" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall4/Wall6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall4/Wall6/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall7" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall4/Wall7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall4/Wall7/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall8" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall4/Wall8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall4/Wall8/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall9" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall4/Wall9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall4/Wall9/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall10" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall4/Wall10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall4/Wall10/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall11" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall4/Wall11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall4/Wall11/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall12" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall4/Wall12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall4/Wall12/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall13" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall4/Wall13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall4/Wall13/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall14" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall4/Wall14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall4/Wall14/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("ConvexPolygonShape3D_df8pj")
+
+[node name="Wall15" type="MeshInstance3D" parent="NavigationRegion3D/Walls/BorderWall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70, 5, 0)
+mesh = SubResource("BoxMesh_qw3hq")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/BorderWall4/Wall15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/BorderWall4/Wall15/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_df8pj")
