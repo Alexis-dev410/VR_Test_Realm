@@ -42,4 +42,4 @@ func physics_update(delta: float) -> void:
 		print("🔋 Reload complete — ammo reset")
 		enemy.ammo = enemy.max_ammo  # refill ammo
 
-		state_machine.transition_to("Patrolling")
+		state_machine.transition_to("Idle")
