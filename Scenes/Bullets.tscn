@@ -50,7 +50,7 @@ albedo_texture = ExtResource("1_76lte")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rayda"]
 
-[node name="Bullet" type="Area3D"]
+[node name="Bullet" type="Area3D" groups=["Enemy"]]
 collision_layer = 2
 script = ExtResource("1_rayda")
 

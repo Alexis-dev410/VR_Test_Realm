@@ -7,19 +7,24 @@ class_name TimeSlowManager
 @onready var audio_start := $"TimeSlowStart"
 @onready var audio_stop := $"TimeSlowStop"
 
-var _active: bool = false
+var _active := false
+
+func is_active() -> bool:
+	return _active
+
+func get_scale() -> float:
+	return slow_scale if _active else 1.0
 
 func start_time_slow() -> void:
 	if _active:
 		return
-
+	
 	_active = true
-	Engine.time_scale = slow_scale
 
 	if audio_start:
 		audio_start.play()
 
-	var timer = Timer.new()
+	var timer := Timer.new()
 	timer.one_shot = true
 	timer.wait_time = slow_duration
 	add_child(timer)
@@ -37,7 +42,6 @@ func end_time_slow_now() -> void:
 		return
 
 	_active = false
-	Engine.time_scale = 1.0
 
 	if audio_stop:
 		audio_stop.play()

@@ -215,7 +215,7 @@ shape = SubResource("ConvexPolygonShape3D_gob01")
 [node name="NPC" parent="." instance=ExtResource("1_sqs8r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.211853, 0.05423343, -1.4598637)
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." groups=["Player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2567444, 3.8372428, 10.067102)
 script = ExtResource("2_6gacc")
 

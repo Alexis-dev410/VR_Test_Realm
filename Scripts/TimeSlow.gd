@@ -23,7 +23,6 @@ func _input(event):
 func activate_clock() -> void:
 	is_active = true
 
-	anim_player.speed_scale = 4.0
 	anim_player.play("UseSlow")
 
 	if audio_start:
@@ -32,23 +31,19 @@ func activate_clock() -> void:
 	if manager:
 		manager.start_time_slow()
 
-	var real_use_time := use_time
+	var real_use_time: float = use_time
 	if manager:
-		real_use_time = manager.slow_duration * manager.slow_scale
+		real_use_time = float(manager.slow_duration)
+		await get_tree().create_timer(real_use_time, false).timeout
 
-	await get_tree().create_timer(real_use_time, false).timeout
-
-	if manager and manager.has_method("end_time_slow_now"):
+	if manager:
 		manager.end_time_slow_now()
-	elif manager and manager.has_method("_end_time_slow"):
-		manager._end_time_slow()
 
-	anim_player.speed_scale = 1.0
 	anim_player.play("RechargeSlow")
 
 	if audio_stop:
 		audio_stop.play()
 
-func _on_animation_finished(anim_name: String) -> void:
+func _on_animation_finished(anim_name: String):
 	if anim_name == "RechargeSlow" and not anim_player.is_playing():
 		is_active = false
