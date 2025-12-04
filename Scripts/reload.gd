@@ -3,6 +3,10 @@ extends State
 @onready var anim: AnimationPlayer = $"../../AnimationPlayer"
 
 var enemy
+var time_manager
+
+func _ready() -> void:
+	time_manager = get_tree().get_first_node_in_group("TimeSlowManager")
 
 func enter(_msg := {}) -> void:
 	# ensure state_machine is valid
@@ -36,10 +40,18 @@ func enter(_msg := {}) -> void:
 		print("⚠️ enemy.gun_instance is NULL")
 
 
-func physics_update(delta: float) -> void:
-	# Transition back ONLY after animation finishes
+func physics_update(_delta: float) -> void:
+	update_anim_speed()
 	if not anim.is_playing():
 		print("🔋 Reload complete — ammo reset")
 		enemy.ammo = enemy.max_ammo  # refill ammo
 
 		state_machine.transition_to("Idle")
+
+func update_anim_speed():
+	if not anim:
+		return
+	var slow_scale: float = 1.0
+	if time_manager and time_manager.is_active():
+		slow_scale = float(time_manager.get_scale())
+	anim.speed_scale = slow_scale

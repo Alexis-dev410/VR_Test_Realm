@@ -2,9 +2,11 @@ extends State
 
 @onready var anim: AnimationPlayer = $"../../AnimationPlayer"
 var enemy: CharacterBody3D
+var time_manager
 
 func _ready() -> void:
 	enemy = $"../.."
+	time_manager = get_tree().get_first_node_in_group("TimeSlowManager")
 
 func check_dead():
 	if enemy.hp <= 0:
@@ -41,10 +43,20 @@ func enter(_msg := {}) -> void:
 		state_machine.transition_to("Patrolling")
 
 func physics_update(_delta: float) -> void:
+	update_anim_speed()
 	if check_dead():
 		return
 	enemy.check_vision()
 	enemy.velocity = Vector3.ZERO
+
+func update_anim_speed():
+	if not anim:
+		return
+	var slow_scale: float = 1.0
+	if time_manager and time_manager.is_active():
+		slow_scale = float(time_manager.get_scale())
+	anim.speed_scale = slow_scale
+
 
 func exit() -> void:
 	print("Exiting Idle")
